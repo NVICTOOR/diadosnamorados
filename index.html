@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="PT-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Feliz dia dos namorados meu Amor</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      overflow: hidden;
+      background: linear-gradient(to top, #ffe6f0, #ffffff);
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      font-family: Arial, sans-serif;
+    }
+
+    /* Botão com imagem e texto */
+    #btnCarta {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      padding: 15px 30px;
+      font-size: 24px;
+      font-weight: bold;
+      cursor: pointer;
+      border: 2px solid #ff69b4;
+      background-color: white;
+      color: #ff69b4;
+      border-radius: 10px;
+      transition: background-color 0.4s, color 0.4s;
+      user-select: none;
+      position: relative;
+      z-index: 10;
+      overflow: hidden;
+    }
+
+    #btnCarta:hover {
+      background-color: #ff69b4;
+      color: white;
+    }
+
+    #btnCarta img {
+      width: 50px;
+      height: auto;
+      transition: transform 0.3s ease;
+      user-select: none;
+      pointer-events: none;
+    }
+
+    /* Animação da carta ao clicar */
+    .clicado img {
+      animation: abrirCarta 1s ease forwards;
+    }
+
+    @keyframes abrirCarta {
+      0% {
+        transform: scale(1);
+        opacity: 1;
+      }
+      50% {
+        transform: scale(1.1);
+        opacity: 0.6;
+      }
+      100% {
+        transform: scale(1);
+        opacity: 1;
+      }
+    }
+
+    /* Confetes em forma de coração */
+    .confete {
+      position: absolute;
+      bottom: -30px;
+      font-size: 20px;
+      color: #ff69b4;
+      animation-name: subirConfete;
+      animation-timing-function: linear;
+      animation-iteration-count: infinite;
+      opacity: 0.8;
+      user-select: none;
+      pointer-events: none;
+      filter: drop-shadow(0 0 2px #ff4da6);
+    }
+
+    @keyframes subirConfete {
+      0% {
+        transform: translateY(0) scale(1) rotate(0deg);
+        opacity: 0.8;
+      }
+      50% {
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(-110vh) scale(0.7) rotate(360deg);
+        opacity: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <button id="btnCarta" aria-label="Clique para abrir a cartinha">
+    <img id="imagemCarta" src="icones/cartafechada1.png" alt="Carta fechada" />
+    Clique aqui
+  </button>
+
+  <script>
+    const btn = document.getElementById('btnCarta');
+    const imagemCarta = document.getElementById('imagemCarta');
+
+    btn.addEventListener('click', () => {
+      btn.classList.add('clicado');
+
+      // Trocar imagem após 500ms
+      setTimeout(() => {
+        imagemCarta.src = 'icones/cartaaberta1.png';
+        imagemCarta.alt = 'Carta aberta';
+      }, 500);
+
+      // Redirecionar após 2 segundos
+      setTimeout(() => {
+        window.location.href = 'Amor_em_pixels.html';
+      }, 2000);
+    });
+
+    // Confetes
+    function criarConfete() {
+      const confete = document.createElement('div');
+      confete.classList.add('confete');
+      confete.innerHTML = '❤️';
+
+      confete.style.left = Math.random() * 100 + 'vw';
+
+      const duracao = 4000 + Math.random() * 3000;
+      confete.style.animationDuration = duracao + 'ms';
+
+      const tamanho = 15 + Math.random() * 20;
+      confete.style.fontSize = tamanho + 'px';
+
+      document.body.appendChild(confete);
+
+      setTimeout(() => {
+        confete.remove();
+      }, duracao);
+    }
+
+    setInterval(criarConfete, 300);
+  </script>
+
+</body>
+</html>
